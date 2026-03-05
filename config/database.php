@@ -45,12 +45,14 @@ class Database {
 // --- HELPER FUNCTIONS ---
 
 // Fungsi mencatat aktivitas (Audit Trail)
-function logActivity($db, $userId, $action, $description) {
-    try {
-        $stmt = $db->prepare("INSERT INTO activity_logs (user_id, action_type, description) VALUES (?, ?, ?)");
-        $stmt->execute([$userId, $action, $description]);
-    } catch (Exception $e) {
-        // Silent fail agar tidak mengganggu flow utama
+if (!function_exists('logActivity')) {
+    function logActivity($db, $userId, $action, $description) {
+        try {
+            $stmt = $db->prepare("INSERT INTO activity_logs (user_id, action_type, description) VALUES (?, ?, ?)");
+            $stmt->execute([$userId, $action, $description]);
+        } catch (Exception $e) {
+            // Silent fail
+        }
     }
 }
 
@@ -65,3 +67,4 @@ function createNotification($db, $targetRole, $title, $message, $targetUserId = 
     }
 }
 ?>
+
