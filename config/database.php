@@ -11,30 +11,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 class Database {
-    private $host = "localhost";
-    private $db_name = "resto_db";
-    private $username = "root";
-    private $password = "";
-    public $conn;
+    private $host = "mikelrestotest-restomikel123.a.aivencloud.com";
+    private $db_name = "defaultdb";
+    private $username = "avnadmin";
+    private $password = "AVNS_vxAbr1k9O5RN8C4wB0B";
+    private $port = "27423";
+   public $conn;
 
     public function getConnection() {
         $this->conn = null;
+
         try {
             $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
+                "mysql:host=".$this->host.";port=".$this->port.";dbname=".$this->db_name,
                 $this->username,
                 $this->password
             );
+
             $this->conn->exec("set names utf8");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         } catch(PDOException $exception) {
-            echo json_encode(["success" => false, "message" => "DB Error: " . $exception->getMessage()]);
+            echo json_encode([
+                "success"=>false,
+                "message"=>"DB Error: ".$exception->getMessage()
+            ]);
             exit();
         }
+
         return $this->conn;
     }
 }
-
 // --- HELPER FUNCTIONS ---
 
 // Fungsi mencatat aktivitas (Audit Trail)
