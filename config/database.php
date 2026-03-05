@@ -57,14 +57,17 @@ if (!function_exists('logActivity')) {
 }
 
 // Fungsi membuat notifikasi internal
-function createNotification($db, $targetRole, $title, $message, $targetUserId = null) {
-    try {
-        $sql = "INSERT INTO notifications (target_role, target_user_id, title, message) VALUES (?, ?, ?, ?)";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$targetRole, $targetUserId, $title, $message]);
-    } catch (Exception $e) {
-        // Silent fail
+if (!function_exists('createNotification')) {
+    function createNotification($db, $targetRole, $title, $message, $targetUserId = null) {
+        try {
+            $sql = "INSERT INTO notifications (target_role, target_user_id, title, message) VALUES (?, ?, ?, ?)";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$targetRole, $targetUserId, $title, $message]);
+        } catch (Exception $e) {
+            // Silent fail
+        }
     }
 }
 ?>
+
 
