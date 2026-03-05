@@ -8,7 +8,7 @@ COPY . /var/www/html/
 
 WORKDIR /var/www/html/
 
-# Enable mod_rewrite
+# Enable rewrite (opsional)
 RUN a2enmod rewrite
 
 EXPOSE 8080
