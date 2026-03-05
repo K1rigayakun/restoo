@@ -11,11 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 class Database {
-    private $host = "mikelrestotest-restomikel123.a.aivencloud.com";
-    private $db_name = "defaultdb";
-    private $username = "avnadmin";
-    private $password = "AVNS_vxAbr1k9O5RN8C4wB0B";
-    private $port = "27423";
+    private $host = "localhost";
+    private $db_name = "if0_41313584_resto_db";
+    private $username = "if0_41313584";
+    private $password = "PKFHB8BJZqh";
    public $conn;
 
     public function getConnection() {
@@ -69,5 +68,6 @@ if (!function_exists('createNotification')) {
     }
 }
 ?>
+
 
 
